@@ -1,0 +1,1358 @@
+<!-- mixer  yess-->
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova nest Navigation Bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+      .slider-wrapper {
+    max-width: 1440px;
+     height: 420px;      
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+      .slides-track {
+    display: flex;
+    transition: transform 0.8s ease;
+}
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+              object-fit: contain;    
+    object-position: center; 
+    background-color: #000;  
+
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        transition: transform 0.35s ease-in-out;
+        }
+
+        .dot.active {
+            background: #ff6b35;
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .slider-wrapper { height: 400px; }
+        }
+     body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      height: 100%;
+      width: 100%;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+ 
+    .header {
+      background: linear-gradient(135deg, #ff6b35 0%, #c41e3a 100%);
+      padding: 20px 32px;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+
+    .category-nav {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e4e8;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .category-nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 65px;
+    }
+
+    .category-item {
+      position: relative;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333333;
+      white-space: nowrap;
+    }
+
+    .category-item:hover {
+      color: #ff6b35;
+      border-bottom-color: #ff6b35;
+      background: #fafafa;
+    }
+
+    .category-item-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+
+    
+   .mega-menu {
+  position: fixed;
+  top: 168px;                 
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  background: white;
+  border-top: 4px solid #ff6b35;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-15px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+  padding: 32px 0;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+
+    .category-item:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    .mega-menu-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      min-height: 400px;
+    }
+
+    .mega-menu-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .mega-menu-column h3 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #ff6b35;
+      display: inline-block;
+    }
+
+    .mega-menu-column ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mega-menu-column li {
+      margin: 0;
+    }
+
+    .mega-menu-column a {
+      text-decoration: none;
+      color: #555555;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .mega-menu-column a:hover {
+      color: #ff6b35;
+      padding-left: 6px;
+    }
+
+    .mega-menu-column a::before {
+      content: '';
+      width: 0;
+      height: 0;
+      margin-right: 6px;
+      transition: width 0.2s ease;
+      overflow: hidden;
+    }
+
+    .mega-menu-column a:hover::before {
+      content: '→';
+      width: auto;
+    }
+
+    .mega-menu-column .view-all {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e4e8;
+      color: #ff6b35;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .mega-menu-column .view-all:hover {
+      color: #c41e3a;
+    }
+
+
+    .mega-menu-banner {
+      background: linear-gradient(135deg, #fff5f0 0%, #ffe6e1 100%);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #ffccbb;
+    }
+
+    .mega-menu-banner::before {
+      content: '🔥';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 32px;
+      opacity: 0.3;
+    }
+
+    .mega-menu-banner-tag {
+      background: #ff6b35;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .mega-menu-banner h4 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #c41e3a;
+      margin: 0 0 8px 0;
+      line-height: 1.3;
+    }
+
+    .mega-menu-banner p {
+      font-size: 13px;
+      color: #666666;
+      margin: 0 0 16px 0;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .mega-menu-banner-discount {
+      background: #ff6b35;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .mega-menu-banner-btn {
+      background: linear-gradient(135deg, #ff6b35 0%, #c41e3a 100%);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    }
+
+    .mega-menu-banner-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    .content {
+      flex: 1;
+      padding: 48px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .content h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin: 0 0 16px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .content p {
+      font-size: 15px;
+      color: #666666;
+      line-height: 1.8;
+      margin: 0;
+      max-width: 600px;
+    }
+
+
+    @media (max-width: 1024px) {
+      .mega-menu-inner {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .mega-menu {
+        max-height: 450px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .category-nav-content {
+        gap: 4px;
+        padding: 0 16px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+      }
+
+      .category-item {
+        padding: 0 14px;
+        font-size: 12px;
+      }
+
+      .mega-menu {
+        width: 100vw;
+        max-width: 100vw;
+        left: -14px;
+        padding: 24px 0;
+        margin-left: 0;
+      }
+
+      .mega-menu-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 16px;
+        min-height: auto;
+      }
+
+      .content {
+        padding: 32px 16px;
+      }
+
+      .content h2 {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 20px;
+      }
+
+      .category-item {
+        padding: 0 10px;
+        font-size: 11px;
+      }
+
+      .mega-menu-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .mega-menu-column h3 {
+        font-size: 12px;
+      }
+
+      .mega-menu-column a {
+        font-size: 12px;
+      }
+    }
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+      height: 100%;
+      width: 100%;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .navbar-wrapper {
+      width: 100%;
+    
+    }
+
+    .navbar {
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 0;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .navbar:hover {
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 180px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .brand:hover {
+      transform: scale(1.05);
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #e94560 0%, #d63447 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+
+    .search-container {
+      flex: 1;
+      position: relative;
+      min-width: 200px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 16px 56px 16px 24px;
+      border: 2px solid #e0e4e8;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+      outline: none;
+      background: #f8f9fb;
+    }
+
+    .search-box:focus {
+      border-color: #e94560;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+    }
+
+    .search-button {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, #e94560 0%, #d63447 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+      flex-shrink: 0;
+    }
+
+    .search-button:hover {
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+    }
+
+    .search-icon {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .login-btn {
+      background: #f0f2f5;
+      color: #1a1a2e;
+    }
+
+    .login-btn:hover {
+      background: #e3e6ea;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-btn {
+      background: linear-gradient(135deg, #e94560 0%, #d63447 100%);
+      color: white;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+    }
+
+    .cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(233, 69, 96, 0.4);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ffd700;
+      color: #1a1a2e;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+      }
+
+      .brand {
+        min-width: auto;
+      }
+
+      .search-container {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    .joint{
+        margin-left : 20px;
+         margin-right : 20px;
+        border-radius: 20px;
+         overflow: hidden;
+    
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+
+  <div class="navbar-wrapper">
+   <nav class="navbar">
+    <div class="brand">
+     <div class="brand-logo">
+      N
+     </div><span class="brand-name" id="companyName">Nova nest</span>
+    </div>
+    <div class="search-container"><input type="text" class="search-box" id="searchBox" placeholder="Search for products, brands and more..." aria-label="Search products"> <button class="search-button" aria-label="Search" id="searchBtn">
+      <svg class="search-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35M19 11a8 8 0 11-16 0 8 8 0 0116 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg></button>
+    </div>
+    <div class="nav-actions"><button class="nav-button login-btn" id="loginBtn">
+      <svg class="icon" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+      </svg><span id="loginText">Login</span> </button> <button class="nav-button cart-btn" id="cartBtn">
+      <svg class="icon" viewbox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+      </svg><span id="cartText">My Cart</span> <span class="cart-badge">3</span> </button>
+    </div>
+   </nav>
+  </div>
+  <script>
+      const defaultConfig = {
+          company_name: "Nova nest",
+          search_placeholder: "Search for products, brands and more...",
+          login_text: "Login",
+          cart_text: "My Cart",
+          brand_color: "#e94560",
+          background_color: "#ffffff",
+          text_color: "#1a1a2e",
+          button_color: "#f0f2f5",
+          accent_color: "#e94560",
+          font_family: "Inter",
+          font_size: 16
+      };
+
+      async function onConfigChange(config) {
+          const companyName = config.company_name || defaultConfig.company_name;
+          const searchPlaceholder = config.search_placeholder || defaultConfig.search_placeholder;
+          const loginText = config.login_text || defaultConfig.login_text;
+          const cartText = config.cart_text || defaultConfig.cart_text;
+          const brandColor = config.brand_color || defaultConfig.brand_color;
+          const backgroundColor = config.background_color || defaultConfig.background_color;
+          const textColor = config.text_color || defaultConfig.text_color;
+          const buttonColor = config.button_color || defaultConfig.button_color;
+          const accentColor = config.accent_color || defaultConfig.accent_color;
+          const fontFamily = config.font_family || defaultConfig.font_family;
+          const fontSize = config.font_size || defaultConfig.font_size;
+
+          document.getElementById('companyName').textContent = companyName;
+          document.getElementById('searchBox').placeholder = searchPlaceholder;
+          document.getElementById('loginText').textContent = loginText;
+          document.getElementById('cartText').textContent = cartText;
+
+          const navbar = document.querySelector('.navbar');
+          navbar.style.background = backgroundColor;
+
+          const brandLogo = document.querySelector('.brand-logo');
+          brandLogo.style.background = `linear-gradient(135deg, ${brandColor} 0%, ${adjustColor(brandColor, -20)} 100%)`;
+          brandLogo.textContent = companyName.charAt(0).toUpperCase();
+
+          const brandNameEl = document.querySelector('.brand-name');
+          brandNameEl.style.color = textColor;
+          brandNameEl.style.fontFamily = `${fontFamily}, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+          brandNameEl.style.fontSize = `${fontSize * 1.625}px`;
+
+          const searchBox = document.querySelector('.search-box');
+          searchBox.style.fontFamily = `${fontFamily}, sans-serif`;
+          searchBox.style.fontSize = `${fontSize}px`;
+
+          const searchButton = document.querySelector('.search-button');
+          searchButton.style.background = `linear-gradient(135deg, ${accentColor} 0%, ${adjustColor(accentColor, -20)} 100%)`;
+
+          const loginBtn = document.querySelector('.login-btn');
+          loginBtn.style.background = buttonColor;
+          loginBtn.style.color = textColor;
+          loginBtn.style.fontFamily = `${fontFamily}, sans-serif`;
+          loginBtn.style.fontSize = `${fontSize * 0.9375}px`;
+
+          const cartBtn = document.querySelector('.cart-btn');
+          cartBtn.style.background = `linear-gradient(135deg, ${accentColor} 0%, ${adjustColor(accentColor, -20)} 100%)`;
+          cartBtn.style.fontFamily = `${fontFamily}, sans-serif`;
+          cartBtn.style.fontSize = `${fontSize * 0.9375}px`;
+      }
+
+      function adjustColor(color, percent) {
+          const num = parseInt(color.replace("#", ""), 16);
+          const amt = Math.round(2.55 * percent);
+          const R = (num >> 16) + amt;
+          const G = (num >> 8 & 0x00FF) + amt;
+          const B = (num & 0x0000FF) + amt;
+          return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+              (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+              (B < 255 ? B < 1 ? 0 : B : 255))
+              .toString(16).slice(1);
+      }
+
+      function mapToCapabilities(config) {
+          return {
+              recolorables: [
+                  {
+                      get: () => config.brand_color || defaultConfig.brand_color,
+                      set: (value) => {
+                          config.brand_color = value;
+                          if (window.elementSdk) window.elementSdk.setConfig({ brand_color: value });
+                      }
+                  },
+                  {
+                      get: () => config.background_color || defaultConfig.background_color,
+                      set: (value) => {
+                          config.background_color = value;
+                          if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
+                      }
+                  },
+                  {
+                      get: () => config.text_color || defaultConfig.text_color,
+                      set: (value) => {
+                          config.text_color = value;
+                          if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
+                      }
+                  },
+                  {
+                      get: () => config.button_color || defaultConfig.button_color,
+                      set: (value) => {
+                          config.button_color = value;
+                          if (window.elementSdk) window.elementSdk.setConfig({ button_color: value });
+                      }
+                  },
+                  {
+                      get: () => config.accent_color || defaultConfig.accent_color,
+                      set: (value) => {
+                          config.accent_color = value;
+                          if (window.elementSdk) window.elementSdk.setConfig({ accent_color: value });
+                      }
+                  }
+              ],
+              borderables: [],
+              fontEditable: {
+                  get: () => config.font_family || defaultConfig.font_family,
+                  set: (value) => {
+                      config.font_family = value;
+                      if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
+                  }
+              },
+              fontSizeable: {
+                  get: () => config.font_size || defaultConfig.font_size,
+                  set: (value) => {
+                      config.font_size = value;
+                      if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
+                  }
+              }
+          };
+      }
+
+      function mapToEditPanelValues(config) {
+          return new Map([
+              ["company_name", config.company_name || defaultConfig.company_name],
+              ["search_placeholder", config.search_placeholder || defaultConfig.search_placeholder],
+              ["login_text", config.login_text || defaultConfig.login_text],
+              ["cart_text", config.cart_text || defaultConfig.cart_text]
+          ]);
+      }
+
+      if (window.elementSdk) {
+          window.elementSdk.init({
+              defaultConfig,
+              onConfigChange,
+              mapToCapabilities,
+              mapToEditPanelValues
+          });
+      }
+
+      // Search functionality
+      document.getElementById('searchBtn').addEventListener('click', function () {
+          const searchValue = document.getElementById('searchBox').value;
+          if (searchValue.trim()) {
+              const message = document.createElement('div');
+              message.style.cssText = 'position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: #e94560; color: white; padding: 16px 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3); z-index: 1000; font-weight: 600;';
+              message.textContent = `Searching for: ${searchValue}`;
+              document.body.appendChild(message);
+              setTimeout(() => message.remove(), 3000);
+          }
+      });
+
+      document.getElementById('searchBox').addEventListener('keypress', function (e) {
+          if (e.key === 'Enter') {
+              document.getElementById('searchBtn').click();
+          }
+      });
+
+      // Login button functionality
+      document.getElementById('loginBtn').addEventListener('click', function () {
+          const message = document.createElement('div');
+          message.style.cssText = 'position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: white; padding: 16px 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); z-index: 1000; font-weight: 600;';
+          message.textContent = 'Login clicked! 👤';
+          document.body.appendChild(message);
+          setTimeout(() => message.remove(), 3000);
+      });
+
+      // Cart button functionality
+      document.getElementById('cartBtn').addEventListener('click', function () {
+          const message = document.createElement('div');
+          message.style.cssText = 'position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: #e94560; color: white; padding: 16px 32px; border-radius: 12px; box-shadow: 0 4px 20px rgba(233, 69, 96, 0.3); z-index: 1000; font-weight: 600;';
+          message.textContent = 'Opening cart... 🛒';
+          document.body.appendChild(message);
+          setTimeout(() => message.remove(), 3000);
+      });
+  </script>
+ <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9c35ac66d5dc160c',t:'MTc2OTMyMjExOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+
+  <div class="container"><!-- Category Navigation Bar -->
+   <nav class="category-nav">
+    <div class="category-nav-content"><!-- Men's Fashion -->
+     <div class="category-item"><span class="category-item-icon">👔</span> <span>Men's Fashion</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Clothing</h3>
+         <ul>
+          <li><a href="#men-shirts">Shirts</a></li>
+          <li><a href="#men-tshirts">T-Shirts</a></li>
+          <li><a href="#men-polos">Polos</a></li>
+          <li><a href="#men-jeans">Jeans</a></li>
+          <li><a href="#men-shorts">Shorts</a></li>
+          <li><a href="#men-trousers">Trousers</a></li>
+          <li><a href="#men-jackets">Jackets</a></li>
+          <li><a href="#men-blazers">Blazers</a></li>
+         </ul><a href="#men-clothing-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Footwear</h3>
+         <ul>
+          <li><a href="#men-sneakers">Sneakers</a></li>
+          <li><a href="#men-casual-shoes">Casual Shoes</a></li>
+          <li><a href="#men-formal">Formal Shoes</a></li>
+          <li><a href="#men-loafers">Loafers</a></li>
+          <li><a href="#men-boots">Boots</a></li>
+          <li><a href="#men-sandals">Sandals</a></li>
+          <li><a href="#men-flip-flops">Flip-Flops</a></li>
+          <li><a href="#men-sports-shoes">Sports Shoes</a></li>
+         </ul><a href="#men-footwear-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Accessories</h3>
+         <ul>
+          <li><a href="#men-watches">Watches</a></li>
+          <li><a href="#men-belts">Belts</a></li>
+          <li><a href="#men-ties">Ties &amp; Bow Ties</a></li>
+          <li><a href="#men-bags">Bags &amp; Backpacks</a></li>
+          <li><a href="#men-wallets">Wallets</a></li>
+          <li><a href="#men-sunglasses">Sunglasses</a></li>
+          <li><a href="#men-hats">Hats &amp; Caps</a></li>
+          <li><a href="#men-jewelry">Jewelry</a></li>
+         </ul><a href="#men-accessories-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">HOT DEAL</span>
+         <h4>Summer Sale</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 60% OFF
+         </div>
+         <p>On selected Men's Fashion items</p><button class="mega-menu-banner-btn">Shop Now</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Women's Fashion -->
+     <div class="category-item"><span class="category-item-icon">👗</span> <span>Women's Fashion</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Ethnic Wear</h3>
+         <ul>
+          <li><a href="#women-sarees">Sarees</a></li>
+          <li><a href="#women-kurtis">Kurtis &amp; Tunics</a></li>
+          <li><a href="#women-suits">Suit Sets</a></li>
+          <li><a href="#women-lehengas">Lehengas</a></li>
+          <li><a href="#women-salwar">Salwar Suits</a></li>
+          <li><a href="#women-dupattas">Dupattas</a></li>
+          <li><a href="#women-nightwear">Nightwear</a></li>
+         </ul><a href="#women-ethnic-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Western Wear</h3>
+         <ul>
+          <li><a href="#women-dresses">Dresses</a></li>
+          <li><a href="#women-tops">Tops &amp; T-Shirts</a></li>
+          <li><a href="#women-jeans">Jeans</a></li>
+          <li><a href="#women-trousers">Trousers</a></li>
+          <li><a href="#women-skirts">Skirts</a></li>
+          <li><a href="#women-shorts">Shorts</a></li>
+          <li><a href="#women-jumpsuits">Jumpsuits</a></li>
+         </ul><a href="#women-western-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Footwear</h3>
+         <ul>
+          <li><a href="#women-heels">Heels</a></li>
+          <li><a href="#women-flats">Flats</a></li>
+          <li><a href="#women-sneakers">Sneakers</a></li>
+          <li><a href="#women-boots">Boots</a></li>
+          <li><a href="#women-sandals">Sandals</a></li>
+          <li><a href="#women-slippers">Slippers</a></li>
+          <li><a href="#women-sports-shoes">Sports Shoes</a></li>
+         </ul><a href="#women-footwear-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">EXCLUSIVE</span>
+         <h4>New Collection</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 50% OFF
+         </div>
+         <p>Latest designer wear</p><button class="mega-menu-banner-btn">Explore</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Home & Kitchen -->
+     <div class="category-item"><span class="category-item-icon">🏠</span> <span>Home &amp; Kitchen</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Kitchen Essentials</h3>
+         <ul>
+          <li><a href="#kitchen-cookware">Cookware Sets</a></li>
+          <li><a href="#kitchen-pans">Fry Pans</a></li>
+          <li><a href="#kitchen-pots">Pressure Cookers</a></li>
+          <li><a href="#kitchen-utensils">Utensils</a></li>
+          <li><a href="#kitchen-storage">Storage Containers</a></li>
+          <li><a href="#kitchen-appliances">Small Appliances</a></li>
+          <li><a href="#kitchen-mixers">Mixers &amp; Blenders</a></li>
+         </ul><a href="#kitchen-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Bedding &amp; Bath</h3>
+         <ul>
+          <li><a href="#home-bedsheet">Bed Sheets</a></li>
+          <li><a href="#home-pillows">Pillows &amp; Cushions</a></li>
+          <li><a href="#home-comforters">Comforters</a></li>
+          <li><a href="#home-towels">Towels</a></li>
+          <li><a href="#home-bathmat">Bath Mats</a></li>
+          <li><a href="#home-curtains">Curtains</a></li>
+          <li><a href="#home-doormats">Door Mats</a></li>
+         </ul><a href="#home-bedding-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Home Decor</h3>
+         <ul>
+          <li><a href="#decor-paintings">Wall Art &amp; Paintings</a></li>
+          <li><a href="#decor-plants">Indoor Plants</a></li>
+          <li><a href="#decor-lighting">Lighting Fixtures</a></li>
+          <li><a href="#decor-rugs">Rugs &amp; Carpets</a></li>
+          <li><a href="#decor-mirrors">Mirrors</a></li>
+          <li><a href="#decor-frames">Photo Frames</a></li>
+          <li><a href="#decor-clocks">Wall Clocks</a></li>
+         </ul><a href="#decor-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">TRENDING</span>
+         <h4>Home Makeover</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 70% OFF
+         </div>
+         <p>Transform your space</p><button class="mega-menu-banner-btn">Discover</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Kids Fashion -->
+     <div class="category-item"><span class="category-item-icon">👶</span> <span>Kids Fashion</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Clothing</h3>
+         <ul>
+          <li><a href="#kids-shirts">Shirts &amp; T-Shirts</a></li>
+          <li><a href="#kids-dresses">Dresses &amp; Frocks</a></li>
+          <li><a href="#kids-jeans">Jeans &amp; Pants</a></li>
+          <li><a href="#kids-jacket">Jackets &amp; Hoodies</a></li>
+          <li><a href="#kids-shorts">Shorts</a></li>
+          <li><a href="#kids-school-uniform">School Uniform</a></li>
+          <li><a href="#kids-sleepwear">Sleep Wear</a></li>
+         </ul><a href="#kids-clothing-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Footwear</h3>
+         <ul>
+          <li><a href="#kids-school-shoes">School Shoes</a></li>
+          <li><a href="#kids-casual">Casual Shoes</a></li>
+          <li><a href="#kids-sports">Sports Shoes</a></li>
+          <li><a href="#kids-sandals">Sandals</a></li>
+          <li><a href="#kids-flip-flops">Flip-Flops</a></li>
+          <li><a href="#kids-boots">Boots</a></li>
+         </ul>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Accessories &amp; Gear</h3>
+         <ul>
+          <li><a href="#kids-bags">School Bags</a></li>
+          <li><a href="#kids-caps">Caps &amp; Hats</a></li>
+          <li><a href="#kids-watch">Watches</a></li>
+          <li><a href="#kids-socks">Socks</a></li>
+          <li><a href="#kids-belts">Belts</a></li>
+          <li><a href="#kids-sports-gear">Sports Gear</a></li>
+          <li><a href="#kids-toys">Toys &amp; Games</a></li>
+         </ul><a href="#kids-accessories-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">KIDS SALE</span>
+         <h4>Back to School</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 55% OFF
+         </div>
+         <p>Everything kids need</p><button class="mega-menu-banner-btn">Shop</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Beauty & Health -->
+     <div class="category-item"><span class="category-item-icon">💄</span> <span>Beauty &amp; Health</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Beauty &amp; Cosmetics</h3>
+         <ul>
+          <li><a href="#beauty-makeup">Makeup</a></li>
+          <li><a href="#beauty-lipstick">Lipstick &amp; Lip Care</a></li>
+          <li><a href="#beauty-eyeshadow">Eye Makeup</a></li>
+          <li><a href="#beauty-foundation">Foundation &amp; Base</a></li>
+          <li><a href="#beauty-mascara">Mascara</a></li>
+          <li><a href="#beauty-nail">Nail Care</a></li>
+         </ul>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Skin &amp; Hair Care</h3>
+         <ul>
+          <li><a href="#health-skincare">Skincare</a></li>
+          <li><a href="#health-facewash">Face Wash</a></li>
+          <li><a href="#health-moisturizer">Moisturizers</a></li>
+          <li><a href="#health-haircare">Hair Care</a></li>
+          <li><a href="#health-shampoo">Shampoos</a></li>
+          <li><a href="#health-conditioner">Conditioners</a></li>
+         </ul><a href="#health-skincare-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Health &amp; Wellness</h3>
+         <ul>
+          <li><a href="#health-supplements">Supplements</a></li>
+          <li><a href="#health-vitamins">Vitamins</a></li>
+          <li><a href="#health-wellness">Wellness</a></li>
+          <li><a href="#health-yoga">Yoga Mat</a></li>
+          <li><a href="#health-personal">Personal Care</a></li>
+          <li><a href="#health-equipment">Equipment</a></li>
+         </ul><a href="#health-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">WELLNESS</span>
+         <h4>Glow &amp; Wellness</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 45% OFF
+         </div>
+         <p>Feel your best self</p><button class="mega-menu-banner-btn">Explore</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Electronics -->
+     <div class="category-item"><span class="category-item-icon">📱</span> <span>Electronics</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Mobile &amp; Tablets</h3>
+         <ul>
+          <li><a href="#electronics-smartphones">Smartphones</a></li>
+          <li><a href="#electronics-tablets">Tablets</a></li>
+          <li><a href="#electronics-chargers">Chargers</a></li>
+          <li><a href="#electronics-cases">Cases &amp; Covers</a></li>
+          <li><a href="#electronics-screen-protector">Screen Protectors</a></li>
+          <li><a href="#electronics-cables">Cables</a></li>
+         </ul><a href="#electronics-mobile-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Computers &amp; Laptops</h3>
+         <ul>
+          <li><a href="#electronics-laptops">Laptops</a></li>
+          <li><a href="#electronics-desktops">Desktops</a></li>
+          <li><a href="#electronics-monitors">Monitors</a></li>
+          <li><a href="#electronics-keyboard">Keyboards</a></li>
+          <li><a href="#electronics-mouse">Mice</a></li>
+          <li><a href="#electronics-storage">Storage Devices</a></li>
+         </ul><a href="#electronics-computers-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Audio &amp; Video</h3>
+         <ul>
+          <li><a href="#electronics-headphones">Headphones</a></li>
+          <li><a href="#electronics-earphones">Earphones</a></li>
+          <li><a href="#electronics-speakers">Speakers</a></li>
+          <li><a href="#electronics-cameras">Cameras</a></li>
+          <li><a href="#electronics-tvs">Smart TVs</a></li>
+          <li><a href="#electronics-gaming">Gaming</a></li>
+         </ul><a href="#electronics-audio-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">MEGA SALE</span>
+         <h4>Tech Deals</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 65% OFF
+         </div>
+         <p>Latest gadgets &amp; tech</p><button class="mega-menu-banner-btn">Shop</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Sports & Fitness -->
+     <div class="category-item"><span class="category-item-icon">⚽</span> <span>Sports &amp; Fitness</span>
+      <div class="mega-menu">
+       <div class="mega-menu-inner">
+        <div class="mega-menu-column">
+         <h3>Sports Equipment</h3>
+         <ul>
+          <li><a href="#sports-shoes">Sports Shoes</a></li>
+          <li><a href="#sports-apparel">Sports Apparel</a></li>
+          <li><a href="#sports-bags">Sports Bags</a></li>
+          <li><a href="#sports-balls">Balls</a></li>
+          <li><a href="#sports-rackets">Rackets</a></li>
+          <li><a href="#sports-bats">Bats</a></li>
+         </ul><a href="#sports-equipment-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Fitness Gear</h3>
+         <ul>
+          <li><a href="#fitness-weights">Weights &amp; Dumbbells</a></li>
+          <li><a href="#fitness-yoga">Yoga Mats</a></li>
+          <li><a href="#fitness-bands">Resistance Bands</a></li>
+          <li><a href="#fitness-mats">Exercise Mats</a></li>
+          <li><a href="#fitness-skipping">Skipping Ropes</a></li>
+          <li><a href="#fitness-jump-box">Jump Box</a></li>
+         </ul><a href="#fitness-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column">
+         <h3>Outdoor &amp; Adventure</h3>
+         <ul>
+          <li><a href="#outdoor-camping">Camping Gear</a></li>
+          <li><a href="#outdoor-hiking">Hiking Boots</a></li>
+          <li><a href="#outdoor-cycling">Cycling Gear</a></li>
+          <li><a href="#outdoor-backpacks">Backpacks</a></li>
+          <li><a href="#outdoor-tents">Tents</a></li>
+          <li><a href="#outdoor-sleeping">Sleeping Bags</a></li>
+         </ul><a href="#outdoor-all" class="view-all">View All →</a>
+        </div>
+        <div class="mega-menu-column mega-menu-banner"><span class="mega-menu-banner-tag">ACTIVE</span>
+         <h4>Get Active</h4>
+         <div class="mega-menu-banner-discount">
+          Up to 40% OFF
+         </div>
+         <p>Achieve your fitness goals</p><button class="mega-menu-banner-btn">Start</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Content Area -->
+  
+  <script>
+      const categoryItems = document.querySelectorAll('.category-item');
+      const categoryTitle = document.getElementById('categoryTitle');
+      const categoryDescription = document.getElementById('categoryDescription');
+
+      const categoryInfo = {
+          "Men's Fashion": {
+              title: "👔 Men's Fashion",
+              description: "Discover the latest trends in men's fashion including casual wear, formal suits, athletic wear, and accessories. From everyday essentials to premium collections, find the perfect style for every occasion and season."
+          },
+          "Women's Fashion": {
+              title: "👗 Women's Fashion",
+              description: "Explore our curated collection of women's fashion featuring traditional wear, contemporary styles, and global brands. Find dresses, sarees, tops, and accessories for every season, celebration, and lifestyle."
+          },
+          "Home & Kitchen": {
+              title: "🏠 Home & Kitchen",
+              description: "Create your dream home with our comprehensive collection of kitchen appliances, home decor, bedding, and furniture. Quality products to make your house feel like home with style and comfort."
+          },
+          "Kids Fashion": {
+              title: "👶 Kids Fashion",
+              description: "Shop for comfortable and stylish clothing for children of all ages. From school uniforms to casual wear, sports gear to accessories, find everything your kids need to look great and feel comfortable."
+          },
+          "Beauty & Health": {
+              title: "💄 Beauty & Health",
+              description: "Enhance your natural beauty and wellness with our range of cosmetics, skincare, haircare, and health supplements. Trusted brands and premium products for daily self-care and personal wellness."
+          },
+          "Electronics": {
+              title: "📱 Electronics",
+              description: "Stay updated with the latest technology. Browse smartphones, laptops, tablets, gaming equipment, and accessories from leading brands. Get the best deals on tech products with warranty."
+          },
+          "Sports & Fitness": {
+              title: "⚽ Sports & Fitness",
+              description: "Achieve your fitness goals with our sports and fitness equipment. From gym equipment to outdoor gear, find everything you need to stay active, healthy, and fit."
+          }
+      };
+
+      categoryItems.forEach(item => {
+          item.addEventListener('mouseenter', function () {
+              const categoryText = this.textContent.trim().split('\n')[1] || this.textContent.trim();
+              const info = categoryInfo[categoryText];
+
+              if (info) {
+                  categoryTitle.textContent = info.title;
+                  categoryDescription.textContent = info.description;
+              }
+          });
+      });
+
+      // Reset on mouse leave from category nav
+      document.querySelector('.category-nav-content').addEventListener('mouseleave', function () {
+          categoryTitle.textContent = 'Welcome to Nova nest';
+          categoryDescription.textContent = 'Explore our wide range of products across all categories. Hover over any category to see our mega menu with extensive product selection and exclusive deals. We offer quality products at competitive prices with fast shipping and excellent customer service.';
+      });
+  </script>
+ <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9c376367f0304479',t:'MTc2OTM0MDEwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script></body>
+<br><br>
+ <div class="slider-wrapper">
+   <div class="slides-track" id="track">
+    <div class="slide">
+     <img src="images/1.png" alt="1">
+
+    </div>
+    <div class="slide">
+     <img src="images/cover2.jpg" alt="2">
+    </div>
+    <div class="slide">
+    <img src="images/cover2.jpg" alt="3">
+    </div>
+     <div class="slide">
+     <img src="images/cover2.jpg" alt="4">
+    </div>
+     <div class="slide">
+     <img src="images/cover2.jpg" alt="5">
+    </div>
+     <div class="slide">
+    <img src="images/cover2.jpg" alt="6">
+    </div>
+     <div class="slide">
+    <img src="images/cover2.jpg" alt="7">
+    </div>
+    
+   </div>
+   <div class="dots" id="dots"></div>
+  </div>
+    <br> <br>
+    <div class="joint">
+     <img src="images/joint.jpg" />
+        </div>
+  <script>
+      const track = document.getElementById('track');
+      const dotsContainer = document.getElementById('dots');
+      let current = 0;
+      const total = 7;
+
+      // Create dots
+      for (let i = 0; i < total; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'dot' + (i === 0 ? ' active' : '');
+          dot.onclick = () => goTo(i);
+          dotsContainer.appendChild(dot);
+      }
+
+      function goTo(n) {
+          current = n;
+          track.style.transform = `translateX(-${current * 100}%)`;
+          updateDots();
+      }
+
+      function updateDots() {
+          document.querySelectorAll('.dot').forEach((dot, i) => {
+              dot.classList.toggle('active', i === current);
+          });
+      }
+
+      function next() {
+          current = (current + 1) % total;
+          goTo(current);
+      }
+
+      setInterval(next, 2500);
+  </script>
+ <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9c37b08084c04479',t:'MTc2OTM0MzI1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+ </html>
